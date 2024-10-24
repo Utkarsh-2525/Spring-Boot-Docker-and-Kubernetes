@@ -1,12 +1,28 @@
 package com.utkarsh2573.accounts.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.utkarsh2573.accounts.constants.AccountsConstants;
+import com.utkarsh2573.accounts.dto.CustomerDto;
+import com.utkarsh2573.accounts.dto.ResponseDto;
+import com.utkarsh2573.accounts.service.IAccountsService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
+// Versioning can be done e.g. @RequestMapping(path = "/api/v1" or "/api/v2")
+@AllArgsConstructor
 public class AccountsController {
-    @GetMapping("sayHello")
-    public String sayHello() {
-        return "Hi World";
+
+    private IAccountsService accountsService;
+
+    @PostMapping("/create")
+    public ResponseEntity<ResponseDto> createAccount(@RequestBody CustomerDto customerDto) {
+        accountsService.createAccount(customerDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
     }
 }
