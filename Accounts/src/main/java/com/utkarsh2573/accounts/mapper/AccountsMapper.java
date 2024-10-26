@@ -4,6 +4,7 @@ import com.utkarsh2573.accounts.dto.AccountsDto;
 import com.utkarsh2573.accounts.entity.Accounts;
 
 public class AccountsMapper {
+
     public static AccountsDto mapToAccountsDto(Accounts accounts, AccountsDto accountsDto) {
         accountsDto.setAccountNumber(accounts.getAccountNumber());
         accountsDto.setAccountType(accounts.getAccountType());

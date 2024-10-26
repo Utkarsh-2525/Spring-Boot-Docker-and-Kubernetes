@@ -1,7 +1,9 @@
 package com.utkarsh2573.accounts.constants;
 
 public class AccountsConstants {
-    private AccountsConstants() {}
+    private AccountsConstants() {
+        // restricting instantiation
+    }
 
     public static final String  SAVINGS = "Savings";
     public static final String  ADDRESS = "123 Main Street, New York";

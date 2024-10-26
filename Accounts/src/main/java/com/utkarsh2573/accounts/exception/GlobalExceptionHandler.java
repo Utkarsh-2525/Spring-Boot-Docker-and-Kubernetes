@@ -1,6 +1,6 @@
 package com.utkarsh2573.accounts.exception;
 
-import com.utkarsh2573.accounts.dto.ErrorDto;
+import com.utkarsh2573.accounts.dto.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,11 +11,10 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(CustomerAlreadyExists.class)
-    public ResponseEntity<ErrorDto> handleCustomerAlreadyExistsException(CustomerAlreadyExists exception,
-                                                                         WebRequest webRequest){
-        ErrorDto errorResponseDTO = new ErrorDto(
+    @ExceptionHandler(CustomerAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException exception,
+                                                                                 WebRequest webRequest){
+        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(
                 webRequest.getDescription(false),
                 HttpStatus.BAD_REQUEST,
                 exception.getMessage(),

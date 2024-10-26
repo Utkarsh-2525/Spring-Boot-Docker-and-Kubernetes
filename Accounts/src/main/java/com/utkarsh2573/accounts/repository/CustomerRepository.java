@@ -8,5 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+    /*
+    multiple queries can be run using And in between and passing parameter separated by commas
+    where findBy acts as Select Query
+     */
     Optional<Customer> findByMobileNumber(String mobileNumber);
 }
