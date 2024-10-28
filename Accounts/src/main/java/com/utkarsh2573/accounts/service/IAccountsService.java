@@ -6,21 +6,28 @@ public interface IAccountsService {
 
     /**
      *
-     * @param customerDto - CustomerDto Object
+     * @param customerDto
      */
     void createAccount(CustomerDto customerDto);
 
     /**
      *
      * @param mobileNumber
-     * @return account number based on a given number
+     * @return account details based on given mobile number
      */
     CustomerDto fetchAccount(String mobileNumber);
 
     /**
      *
      * @param customerDto
-     * @return update status
+     * @return account update status
      */
     boolean updateAccount(CustomerDto customerDto);
+
+    /**
+     *
+     * @param mobileNumber
+     * @return account delete status
+     */
+    boolean deleteAccount(String mobileNumber);
 }
