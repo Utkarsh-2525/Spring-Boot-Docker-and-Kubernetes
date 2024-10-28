@@ -16,4 +16,11 @@ public interface IAccountsService {
      * @return account number based on a given number
      */
     CustomerDto fetchAccount(String mobileNumber);
+
+    /**
+     *
+     * @param customerDto
+     * @return update status
+     */
+    boolean updateAccount(CustomerDto customerDto);
 }
