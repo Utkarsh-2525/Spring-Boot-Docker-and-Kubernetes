@@ -2,9 +2,12 @@ package com.utkarsh2573.accounts.controller;
 
 import com.utkarsh2573.accounts.constants.AccountsConstants;
 import com.utkarsh2573.accounts.dto.CustomerDto;
+import com.utkarsh2573.accounts.dto.ErrorResponseDto;
 import com.utkarsh2573.accounts.dto.ResponseDto;
 import com.utkarsh2573.accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,7 +25,8 @@ import org.springframework.web.bind.annotation.*;
         description = "CRUD REST APIs in demo bank to CREATE, DELETE, UPDATE AND FETCH account details"
 )
 @RestController
-@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE) // Versioning can be done as (path = "/api/v1")
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+// Versioning can be done as (path = "/api/v1")
 @AllArgsConstructor
 @Validated
 public class AccountsController {
@@ -54,8 +58,8 @@ public class AccountsController {
     )
     @GetMapping("/fetch")
     public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
-                                    @Pattern(regexp = "(^$|[0-9]{10})", message = "Account Number must be of 10 digits")
-                                    String mobileNumber) {
+                                                           @Pattern(regexp = "(^$|[0-9]{10})", message = "Account Number must be of 10 digits")
+                                                           String mobileNumber) {
         CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
@@ -71,7 +75,10 @@ public class AccountsController {
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "HTTP Status Internal Server Error"
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
             )
     })
     @PutMapping("/update")
@@ -100,7 +107,7 @@ public class AccountsController {
     })
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam
-                                    @Pattern(regexp = "(^$|[0-9]{10})", message = "Account Number must be of 10 digits")String mobileNumber) {
+                                                            @Pattern(regexp = "(^$|[0-9]{10})", message = "Account Number must be of 10 digits") String mobileNumber) {
         boolean isDeleted = iAccountsService.deleteAccount(mobileNumber);
         if (isDeleted)
             return ResponseEntity.status(HttpStatus.OK)
