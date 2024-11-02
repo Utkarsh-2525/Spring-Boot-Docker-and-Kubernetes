@@ -11,6 +11,7 @@
 	<groupId>com.utkarsh2573</groupId>
 	<artifactId>Loans</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>Loans</name>
 	<description>Loans</description>
 	<url/>
@@ -81,6 +82,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<image>
+						<!--							utkarsh2573/${project.artifactId}:v1.0-->
+						<!--							if artifact ID is in lower case-->
+						<name>
+							utkarsh2573/loans:v1.0
+						</name>
+					</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
