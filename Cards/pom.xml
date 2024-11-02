@@ -11,6 +11,7 @@
 	<groupId>com.utkarsh2573</groupId>
 	<artifactId>Cards</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>Cards</name>
 	<description>Cards</description>
 	<url/>
@@ -87,6 +88,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.2</version>
+				<configuration>
+					<to>
+						<image>utkarsh2573/cards:v1.0</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>
