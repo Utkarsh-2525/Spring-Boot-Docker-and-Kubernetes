@@ -96,7 +96,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>utkarsh2573/cards:v1.0</image>
+						<image>utkarsh2573/cards:v2.0</image>
 					</to>
 				</configuration>
 			</plugin>

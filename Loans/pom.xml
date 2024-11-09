@@ -78,23 +78,33 @@
 
 	<build>
 		<plugins>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<image>-->
+<!--						&lt;!&ndash;							utkarsh2573/${project.artifactId}:v1.0&ndash;&gt;-->
+<!--						&lt;!&ndash;							if artifact ID is in lower case&ndash;&gt;-->
+<!--						<name>-->
+<!--							utkarsh2573/loans:v1.0-->
+<!--						</name>-->
+<!--					</image>-->
+<!--					<excludes>-->
+<!--						<exclude>-->
+<!--							<groupId>org.projectlombok</groupId>-->
+<!--							<artifactId>lombok</artifactId>-->
+<!--						</exclude>-->
+<!--					</excludes>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.2</version>
 				<configuration>
-					<image>
-						<!--							utkarsh2573/${project.artifactId}:v1.0-->
-						<!--							if artifact ID is in lower case-->
-						<name>
-							utkarsh2573/loans:v1.0
-						</name>
-					</image>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<to>
+						<image>utkarsh2573/loans:v2.0</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

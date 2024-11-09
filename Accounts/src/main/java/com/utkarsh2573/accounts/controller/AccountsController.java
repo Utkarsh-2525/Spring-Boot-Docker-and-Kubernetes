@@ -1,6 +1,7 @@
 package com.utkarsh2573.accounts.controller;
 
 import com.utkarsh2573.accounts.constants.AccountsConstants;
+import com.utkarsh2573.accounts.dto.AccountsContactInfoDto;
 import com.utkarsh2573.accounts.dto.CustomerDto;
 import com.utkarsh2573.accounts.dto.ErrorResponseDto;
 import com.utkarsh2573.accounts.dto.ResponseDto;
@@ -13,7 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +30,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 // Versioning can be done as (path = "/api/v1")
-@AllArgsConstructor
 @Validated
 public class AccountsController {
 
-    private IAccountsService iAccountsService;
+    private final IAccountsService iAccountsService;
+
+    public AccountsController(IAccountsService iAccountsService){
+        this.iAccountsService = iAccountsService;
+    }
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     @Operation(
             summary = "Create account REST API",
@@ -114,5 +128,71 @@ public class AccountsController {
                     .body(new ResponseDto(AccountsConstants.STATUS_200, AccountsConstants.MESSAGE_200));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
+    }
+
+    @Operation(
+            summary = "Get Build Version REST API",
+            description = "Get build information deployed in Accounts Microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status FETCHED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "INTERNAL SERVER ERROR",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @Operation(
+            summary = "Get Java Version REST API",
+            description = "Get Java Version Details deployed in Accounts Microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status FETCHED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "INTERNAL SERVER ERROR",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.status(HttpStatus.OK).body(env.getProperty("java.version")); // instead of "JAVA_HOME"
+    }
+
+    @Operation(
+            summary = "Get Contact Details REST API",
+            description = "Get Contact Details in Accounts Microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status FETCHED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "INTERNAL SERVER ERROR",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(accountsContactInfoDto);
     }
 }
