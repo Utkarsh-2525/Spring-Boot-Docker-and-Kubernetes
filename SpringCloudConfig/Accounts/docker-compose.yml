@@ -1,0 +1,40 @@
+services:
+    accounts:
+        image: "utkarsh2573/accounts:v1.0"
+        container_name: accounts-ms
+        ports:
+            - "8080:8080"
+        #      multiple port mapping can be done
+        deploy:
+            resources:
+                limits:
+                    memory: 700m
+        networks:
+            - DemoBank
+    loans:
+        image: "utkarsh2573/loans:v1.0"
+        container_name: loans-ms
+        ports:
+            - "8090:8090"
+        #      multiple port mapping can be done
+        deploy:
+            resources:
+                limits:
+                    memory: 700m
+        networks:
+            - DemoBank
+    cards:
+        image: "utkarsh2573/cards:v1.0"
+        container_name: cards-ms
+        ports:
+            - "9000:9000"
+        #      multiple port mapping can be done
+        deploy:
+            resources:
+                limits:
+                    memory: 700m
+        networks:
+            - DemoBank
+networks:
+    DemoBank: # same name as mentioned in networks of all MicroServices(ms)
+        driver: bridge

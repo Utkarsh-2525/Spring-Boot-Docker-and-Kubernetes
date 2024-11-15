@@ -1,0 +1,11 @@
+build:
+    version: "3.0"
+
+loans:
+    message: "Welcome to DemoBank Loans related APIs"
+    contactDetails:
+        name: "Utkarsh Mishra - Developer"
+        email: "m.utkarsh@general.com"
+    onCallSupport:
+        - (+91) 1234-657-890
+        - (+91) 9876-543-210
