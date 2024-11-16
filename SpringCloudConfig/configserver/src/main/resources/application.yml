@@ -2,12 +2,21 @@ spring:
     application:
         name: "configserver"
     profiles:
-        active: native
+        active: git
+    #        active: native
     cloud:
       config:
         server:
-          native:
-              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
+            git:
+                uri: "https://github.com/Utkarsh-2525/DemoBank-config.git"
+#                username: Utkarsh-2525                             for private...
+#                password: githubum25.                              ...GitHub Repo
+                default-label: main # branch name
+                timeout: 5
+                clone-on-start: true
+                force-pull: true
+#          native:
+#              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
 #              search-locations: "classpath:/config" # defining a path with config files within Config Server
 
 server:
