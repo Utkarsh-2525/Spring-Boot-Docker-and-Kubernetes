@@ -19,5 +19,9 @@ spring:
 #              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
 #              search-locations: "classpath:/config" # defining a path with config files within Config Server
 
+encrypt:
+    key: "5C924E961346428DBD91AAA4DD1EB"
+
+
 server:
     port: 8071
