@@ -5,21 +5,21 @@ spring:
         active: git
     #        active: native
     cloud:
-      config:
-        server:
-            git:
-                uri: "https://github.com/Utkarsh-2525/DemoBank-config.git"
-#                username: Utkarsh-2525                             for private...
-#                password: githubum25.                              ...GitHub Repo
-                default-label: main # branch name
-                timeout: 5
-                clone-on-start: true
-                force-pull: true
-#          native:
-#              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
-#              search-locations: "classpath:/config" # defining a path with config files within Config Server
+        config:
+            server:
+                git:
+                    uri: "https://github.com/Utkarsh-2525/DemoBank-config.git"
+                    #                username: Utkarsh-2525                             for private...
+                    #                password: githubum25.                              ...GitHub Repo
+                    default-label: main # branch name
+                    timeout: 5
+                    clone-on-start: true
+                    force-pull: true
+    #          native:
+    #              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
+    #              search-locations: "classpath:/config" # defining a path with config files within Config Server
 
-    rabbitmq:                           # Uses manual approach to Bus Refresh by invoking the API path...
+    rabbitmq: # Uses manual approach to Bus Refresh by invoking the API path...
         host: "localhost"               # ... localhost:8080/actuator/busrefresh
         port: 5672
         username: "guest"
@@ -30,6 +30,15 @@ management:
         web:
             exposure:
                 include: "*"
+    health:
+        readiness-state:
+            enabled: true
+        liveness-state:
+            enabled: true
+    endpoint:
+        health:
+            probes:
+                enabled: true
 
 encrypt:
     key: "5C924E961346428DBD91AAA4DD1EB"
