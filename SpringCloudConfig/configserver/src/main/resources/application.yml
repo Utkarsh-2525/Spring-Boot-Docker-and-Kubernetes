@@ -19,11 +19,11 @@ spring:
     #              search-locations: "file:///E:/ConfigFiles/config" # defining a path with config files anywhere in file system
     #              search-locations: "classpath:/config" # defining a path with config files within Config Server
 
-    rabbitmq: # Uses manual approach to Bus Refresh by invoking the API path...
-        host: "localhost"               # ... localhost:8080/actuator/busrefresh
-        port: 5672
-        username: "guest"
-        password: "guest"
+#    rabbitmq: # Uses manual approach to Bus Refresh by invoking the API path...
+#        host: "localhost"               # ... localhost:8080/actuator/busrefresh
+#        port: 5672
+#        username: "guest"
+#        password: "guest"
 
 management:
     endpoints:

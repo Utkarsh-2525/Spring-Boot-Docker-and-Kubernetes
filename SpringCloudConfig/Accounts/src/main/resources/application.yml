@@ -6,26 +6,22 @@ spring:
     profiles:
         active: "prod"
     datasource:
-        url: jdbc:h2:mem:testdb
-        driverClassName: org.h2.Driver
+        url: jdbc:mysql://localhost:3306/accountsdb
         username: root
         password: M.Utkarsh
-    h2:
-        console:
-            enabled: true
+    sql:
+        init:
+            mode: always
     jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        hibernate:
-            ddl-auto: update
         show-sql: true
     config:
         import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails...
                                                                # ... to start, microservices would still run
-    rabbitmq:
-        host: "localhost"
-        port: 5672
-        username: "guest"
-        password: "guest"
+#    rabbitmq:
+#        host: "localhost"
+#        port: 5672
+#        username: "guest"
+#        password: "guest"
 management:
   endpoints:
     web:
