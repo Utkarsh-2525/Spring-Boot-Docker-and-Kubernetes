@@ -72,7 +72,7 @@ services:
                 condition: service_healthy
         environment:
             SPRING_APPLICATION_NAME: "Loans"
-            SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3307/loansdb"
+            SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3306/loansdb"
         extends:
             file: common-config.yml
             service: microservice-configserver-config
@@ -89,7 +89,7 @@ services:
                 condition: service_healthy
         environment:
             SPRING_APPLICATION_NAME: "Cards"
-            SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3308/cardsdb"
+            SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cardsdb"
         extends:
             file: common-config.yml
             service: microservice-configserver-config
