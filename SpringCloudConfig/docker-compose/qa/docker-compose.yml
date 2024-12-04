@@ -2,7 +2,7 @@ services:
   accountsdb:
     container_name: accountsdb
     ports:
-      - 3306:3306
+      - 3309:3306
     environment:
       MYSQL_DATABASE: accountsdb
     extends:
@@ -30,7 +30,7 @@ services:
       service: microservice-db-config
 
   configserver:
-    image: "utkarsh2573/configserver:s7"
+    image: "utkarsh2573/configserver:v2.1"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -45,7 +45,7 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "utkarsh2573/accounts:s7"
+    image: "utkarsh2573/accounts:v7.0"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -62,7 +62,7 @@ services:
       service: microservice-configserver-config
 
   loans:
-    image: "utkarsh2573/loans:s7"
+    image: "utkarsh2573/loans:v7.0"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -79,7 +79,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: "utkarsh2573/cards:s7"
+    image: "utkarsh2573/cards:v7.0"
     container_name: cards-ms
     ports:
       - "9000:9000"
