@@ -6,16 +6,20 @@ spring:
     profiles:
         active: "prod"
     datasource:
-        url: jdbc:mysql://localhost:3307/loansdb
+        url: jdbc:h2:mem:testdb
+        driverClassName: org.h2.Driver
         username: root
         password: M.Utkarsh
-    sql:
-        init:
-            mode: always
+    h2:
+        console:
+            enabled: true
     jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
         show-sql: true
     config:
-        import: "optional:configserver:http://localhost:8071/"
+        import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails to start, microservices would still run
 #    rabbitmq:
 #        host: "localhost"
 #        port: 5672
@@ -26,3 +30,27 @@ management:
         web:
             exposure:
                 include: "*"
+    endpoint:
+        shutdown:
+            enabled: true
+    info:
+        env:
+            enabled: true
+
+endpoints:
+    shutdown:
+        enabled: true
+
+eureka:
+    instance:
+        prefer-ip-address: true
+    client:
+        fetchRegistry: true
+        registerWithEureka: true
+        serviceUrl:
+            defaultZone: http://localhost:8070/eureka/
+info:
+    app:
+        name: "accounts"
+        description: "Demo Bank Loans Application"
+        version: "1.0.0"
