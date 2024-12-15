@@ -34,18 +34,16 @@ import org.springframework.web.bind.annotation.*;
 public class AccountsController {
 
     private final IAccountsService iAccountsService;
-
-    public AccountsController(IAccountsService iAccountsService){
-        this.iAccountsService = iAccountsService;
-    }
     @Value("${build.version}")
     private String buildVersion;
-
     @Autowired
     private Environment env;
-
     @Autowired
     private AccountsContactInfoDto accountsContactInfoDto;
+
+    public AccountsController(IAccountsService iAccountsService) {
+        this.iAccountsService = iAccountsService;
+    }
 
     @Operation(
             summary = "Create account REST API",
@@ -66,10 +64,19 @@ public class AccountsController {
             summary = "Fetch account REST API",
             description = "Fetch an Existing Account using Mobile Number"
     )
-    @ApiResponse(
-            responseCode = "200",
-            description = "HTTP Status FETCHED"
-    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status FETCHED"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
     @GetMapping("/fetch")
     public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
                                                            @Pattern(regexp = "(^$|[0-9]{10})", message = "Account Number must be of 10 digits")
