@@ -1,100 +1,103 @@
 services:
-  accountsdb:
-    container_name: accountsdb
-    ports:
-      - 3309:3306
-    environment:
-      MYSQL_DATABASE: accountsdb
-    extends:
-      file: common-config.yml
-      service: microservice-db-config
+    configserver:
+        image: "utkarsh2573/configserver:v8.0"
+        container_name: configserver-ms
+        ports:
+            - "8071:8071"
+        healthcheck:
+            test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+            interval: 10s
+            timeout: 5s
+            retries: 10
+            start_period: 10s
+        extends:
+            file: common-config.yml
+            service: microservice-base-config
 
-  loansdb:
-    container_name: loansdb
-    ports:
-      - 3307:3306
-    environment:
-      MYSQL_DATABASE: loansdb
-    extends:
-      file: common-config.yml
-      service: microservice-db-config
+    eurekaserver:
+        image: "utkarsh2573/eurekaserver:v8.0"
+        container_name: eurekaserver-ms
+        ports:
+            - "8070:8070"
+        depends_on:
+            configserver:
+                condition: service_healthy
+        healthcheck:
+            test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+            interval: 10s
+            timeout: 5s
+            retries: 10
+            start_period: 10s
+        extends:
+            file: common-config.yml
+            service: microservice-configserver-config
+        environment:
+            SPRING_APPLICATION_NAME: "eurekaserver"
 
-  cardsdb:
-    container_name: cardsdb
-    ports:
-      - 3308:3306
-    environment:
-      MYSQL_DATABASE: cardsdb
-    extends:
-      file: common-config.yml
-      service: microservice-db-config
+    accounts:
+        image: "utkarsh2573/accounts:v8.0"
+        container_name: accounts-ms
+        ports:
+            - "8080:8080"
+        depends_on:
+            configserver:
+                condition: service_healthy
+            eurekaserver:
+                condition: service_healthy
+        environment:
+            SPRING_APPLICATION_NAME: "accounts"
+        extends:
+            file: common-config.yml
+            service: microservice-eureka-config
 
-  configserver:
-    image: "utkarsh2573/configserver:v2.1"
-    container_name: configserver-ms
-    ports:
-      - "8071:8071"
-    healthcheck:
-      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    extends:
-      file: common-config.yml
-      service: microservice-base-config
+    loans:
+        image: "utkarsh2573/loans:v8.0"
+        container_name: loans-ms
+        ports:
+            - "8090:8090"
+        depends_on:
+            configserver:
+                condition: service_healthy
+            eurekaserver:
+                condition: service_healthy
+        environment:
+            SPRING_APPLICATION_NAME: "loans"
+        extends:
+            file: common-config.yml
+            service: microservice-eureka-config
 
-  accounts:
-    image: "utkarsh2573/accounts:v7.0"
-    container_name: accounts-ms
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_APPLICATION_NAME: "Accounts"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
-    depends_on:
-      accountsdb:
-        condition: service_healthy
-      configserver:
-        condition: service_healthy
-    extends:
-      file: common-config.yml
-      service: microservice-configserver-config
+    loans1:
+        image: "utkarsh2573/loans:v8.0"
+        container_name: loans-ms1
+        ports:
+            - "8091:8090"
+        depends_on:
+            configserver:
+                condition: service_healthy
+            eurekaserver:
+                condition: service_healthy
+        environment:
+            SPRING_APPLICATION_NAME: "loans"
+        extends:
+            file: common-config.yml
+            service: microservice-eureka-config
 
-  loans:
-    image: "utkarsh2573/loans:v7.0"
-    container_name: loans-ms
-    ports:
-      - "8090:8090"
-    environment:
-      SPRING_APPLICATION_NAME: "Loans"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://loansdb:3306/loansdb"
-    depends_on:
-      loansdb:
-        condition: service_healthy
-      configserver:
-        condition: service_healthy
-    extends:
-      file: common-config.yml
-      service: microservice-configserver-config
-
-  cards:
-    image: "utkarsh2573/cards:v7.0"
-    container_name: cards-ms
-    ports:
-      - "9000:9000"
-    environment:
-      SPRING_APPLICATION_NAME: "Cards"
-      SPRING_DATASOURCE_URL: "jdbc:mysql://cardsdb:3306/cardsdb"
-    depends_on:
-      cardsdb:
-        condition: service_healthy
-      configserver:
-        condition: service_healthy
-    extends:
-      file: common-config.yml
-      service: microservice-configserver-config
+    cards:
+        image: "utkarsh2573/cards:v8.0"
+        container_name: cards-ms
+        ports:
+            - "9000:9000"
+        depends_on:
+            configserver:
+                condition: service_healthy
+            eurekaserver:
+                condition: service_healthy
+        environment:
+            SPRING_APPLICATION_NAME: "cards"
+        extends:
+            file: common-config.yml
+            service: microservice-eureka-config
 
 networks:
-  DemoBank:
-    driver: "bridge"
+    DemoBank:
+        driver: "bridge"
