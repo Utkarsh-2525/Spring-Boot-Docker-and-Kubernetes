@@ -12,11 +12,7 @@ spring:
         discovery:
             locator:
                 enabled: true
-#    rabbitmq:
-#        host: "localhost"
-#        port: 5672
-#        username: "guest"
-#        password: "guest"
+                lowerCaseServiceId: true
 management:
     endpoints:
         web:
