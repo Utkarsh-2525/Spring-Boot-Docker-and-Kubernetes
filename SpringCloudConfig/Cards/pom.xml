@@ -110,7 +110,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>utkarsh2573/cards:v8.0</image>
+						<image>utkarsh2573/cards:v9.0</image>
 					</to>
 				</configuration>
 			</plugin>

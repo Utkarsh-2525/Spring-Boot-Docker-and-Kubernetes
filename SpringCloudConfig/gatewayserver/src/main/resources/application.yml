@@ -1,0 +1,45 @@
+server:
+    port: 8072
+
+
+spring:
+    application:
+        name: "gatewayserver"
+    config:
+        import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails to start, microservices would still run
+    cloud:
+      gateway:
+        discovery:
+            locator:
+                enabled: true
+#    rabbitmq:
+#        host: "localhost"
+#        port: 5672
+#        username: "guest"
+#        password: "guest"
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+      gateway:
+          enabled: true
+    info:
+        env:
+            enabled: true
+
+
+info:
+    app:
+        name: "gatewayserver"
+        description: "Demo Bank Gateway Server Application"
+        version: "1.0.0"
+eureka:
+    instance:
+        preferIpAddress: true
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: "http://localhost:8070/eureka/"
