@@ -6,6 +6,8 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class GatewayserverApplication {
 
@@ -19,17 +21,20 @@ public class GatewayserverApplication {
                 .route(customPath -> customPath
                         .path("/demobank/accounts/**")
                                 .filters(filter -> filter
-                                        .rewritePath("/demobank/accounts/(?<segment>.*)","/${segment}"))
+                                        .rewritePath("/demobank/accounts/(?<segment>.*)","/${segment}")
+                                        .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                                 .uri("lb://ACCOUNTS"))
                 .route(customPath -> customPath
                         .path("/demobank/loans/**")
                         .filters(filter -> filter
-                                .rewritePath("/demobank/accounts/(?<segment>.*)","/${segment}"))
+                                .rewritePath("/demobank/loans/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                         .uri("lb://LOANS"))
                 .route(customPath -> customPath
                         .path("/demobank/cards/**")
                         .filters(filter -> filter
-                                .rewritePath("/demobank/accounts/(?<segment>.*)","/${segment}"))
+                                .rewritePath("/demobank/cards/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                         .uri("lb://CARDS"))
                 .build();
     }
