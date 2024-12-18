@@ -6,12 +6,12 @@ spring:
     application:
         name: "gatewayserver"
     config:
-        import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails to start, microservices would still run
+        import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails                                                          to start, microservices would still run
     cloud:
       gateway:
         discovery:
             locator:
-                enabled: true
+                enabled: false
                 lowerCaseServiceId: true
 management:
     endpoints:
