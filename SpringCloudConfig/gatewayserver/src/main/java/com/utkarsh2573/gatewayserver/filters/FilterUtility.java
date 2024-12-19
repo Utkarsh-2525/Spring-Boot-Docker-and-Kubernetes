@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class FilterUtility {
-    public static final String CorrelationId = "DemoBank-CorrelationId";
+    public static final String CorrelationId = "DemoBank-CorrelationID";
 
     public String getCorrelationId(HttpHeaders requestHeaders) {
         if (requestHeaders.get(CorrelationId)!=null){
