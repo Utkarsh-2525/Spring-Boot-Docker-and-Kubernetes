@@ -39,3 +39,8 @@ eureka:
         fetchRegistry: true
         serviceUrl:
             defaultZone: "http://localhost:8070/eureka/"
+logging:
+    level:
+      com:
+          utkarsh2573:
+              gatewayserver: DEBUG # Logs of com.utkarsh2573.gatewayserver would be printed which are of type debug

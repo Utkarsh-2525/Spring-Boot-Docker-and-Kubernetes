@@ -20,20 +20,20 @@ public class GatewayserverApplication {
         return builder.routes()
                 .route(customPath -> customPath
                         .path("/demobank/accounts/**")
-                                .filters(filter -> filter
-                                        .rewritePath("/demobank/accounts/(?<segment>.*)","/${segment}")
-                                        .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-                                .uri("lb://ACCOUNTS"))
+                        .filters(filter -> filter
+                                .rewritePath("/demobank/accounts/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                        .uri("lb://ACCOUNTS"))
                 .route(customPath -> customPath
                         .path("/demobank/loans/**")
                         .filters(filter -> filter
-                                .rewritePath("/demobank/loans/(?<segment>.*)","/${segment}")
+                                .rewritePath("/demobank/loans/(?<segment>.*)", "/${segment}")
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                         .uri("lb://LOANS"))
                 .route(customPath -> customPath
                         .path("/demobank/cards/**")
                         .filters(filter -> filter
-                                .rewritePath("/demobank/cards/(?<segment>.*)","/${segment}")
+                                .rewritePath("/demobank/cards/(?<segment>.*)", "/${segment}")
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                         .uri("lb://CARDS"))
                 .build();
