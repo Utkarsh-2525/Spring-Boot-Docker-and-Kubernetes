@@ -8,19 +8,19 @@ spring:
     config:
         import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails                                                          to start, microservices would still run
     cloud:
-      gateway:
-        discovery:
-            locator:
-                enabled: false
-                lowerCaseServiceId: true
+        gateway:
+            discovery:
+                locator:
+                    enabled: false
+                    lowerCaseServiceId: true
 management:
     endpoints:
         web:
             exposure:
                 include: "*"
     endpoint:
-      gateway:
-          enabled: true
+        gateway:
+            enabled: true
     info:
         env:
             enabled: true
@@ -41,6 +41,15 @@ eureka:
             defaultZone: "http://localhost:8070/eureka/"
 logging:
     level:
-      com:
-          utkarsh2573:
-              gatewayserver: DEBUG # Logs of com.utkarsh2573.gatewayserver would be printed which are of type debug
+        com:
+            utkarsh2573:
+                gatewayserver: DEBUG # Logs of com.utkarsh2573.gatewayserver would be printed which are of type debug
+resilience4j:
+    circuitbreaker:
+        configs:
+            default:
+                sliding-window-size: 10
+                permitted-number-of-calls-in-half-open-state: 2
+                failure-rate-threshold: 50
+                wait-duration-in-open-state:
+                    seconds: 10
