@@ -23,7 +23,8 @@ public class GatewayserverApplication {
                         .filters(filter -> filter
                                 .rewritePath("/demobank/accounts/(?<segment>.*)", "/${segment}")
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
-                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")))
+                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")
+                                        .setFallbackUri("forward:/contact-support")))
                         .uri("lb://ACCOUNTS"))
                 .route(customPath -> customPath
                         .path("/demobank/loans/**")
