@@ -47,9 +47,16 @@ public class CustomerServiceImpl implements ICustomerService {
         customerDetailsDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
 
         ResponseEntity<LoansDto> loansDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
+        // checking if due to any error the response returned from LoansDto is null
+        if (null != loansDtoResponseEntity)
+            customerDetailsDto.setLoansDto(loansDtoResponseEntity.getBody());
         customerDetailsDto.setLoansDto(loansDtoResponseEntity.getBody());
 
+
         ResponseEntity<CardsDto> cardsDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
+        // checking if due to any error the response returned from CardsDto is null
+        if (null != cardsDtoResponseEntity)
+            customerDetailsDto.setCardsDto(cardsDtoResponseEntity.getBody());
         customerDetailsDto.setCardsDto(cardsDtoResponseEntity.getBody());
 
         return customerDetailsDto;

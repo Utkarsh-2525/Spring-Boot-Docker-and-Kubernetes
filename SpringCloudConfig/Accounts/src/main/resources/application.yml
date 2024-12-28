@@ -20,6 +20,10 @@ spring:
         show-sql: true
     config:
         import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails to start, microservices would still run
+    cloud:
+        openfeign:
+            circuitbreaker:
+                enabled: true
 #    rabbitmq:
 #        host: "localhost"
 #        port: 5672
@@ -67,3 +71,12 @@ logging:
         com:
             utkarsh2573:
                 accounts: DEBUG
+resilience4j:
+    circuitbreaker:
+        configs:
+            default:
+                sliding-window-size: 10
+                permitted-number-of-calls-in-half-open-state: 2
+                failure-rate-threshold: 50
+                wait-duration-in-open-state:
+                    seconds: 10
