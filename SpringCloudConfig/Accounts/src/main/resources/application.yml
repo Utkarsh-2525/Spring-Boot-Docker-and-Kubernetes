@@ -71,12 +71,22 @@ logging:
         com:
             utkarsh2573:
                 accounts: DEBUG
-resilience4j:
-    circuitbreaker:
-        configs:
-            default:
-                sliding-window-size: 10
-                permitted-number-of-calls-in-half-open-state: 2
-                failure-rate-threshold: 50
-                wait-duration-in-open-state:
-                    seconds: 10
+resilience4j.circuitbreaker:
+    configs:
+        default:
+            sliding-window-size: 10
+            permitted-number-of-calls-in-half-open-state: 2
+            failure-rate-threshold: 50
+            wait-duration-in-open-state:
+                seconds: 10
+resilience4j.retry:
+    configs:
+        default:
+            max-attempts: 3
+            wait-duration: 500
+            enable-exponential-backoff: true
+            exponential-backoff-multiplier: 2
+            ignore-exceptions:
+              - java.lang.NullPointerException
+            retry-exceptions:
+              - java.util.concurrent.TimeoutException

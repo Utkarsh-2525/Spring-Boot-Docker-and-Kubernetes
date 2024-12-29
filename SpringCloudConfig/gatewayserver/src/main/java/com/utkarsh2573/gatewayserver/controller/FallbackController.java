@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 public class FallbackController {
     @RequestMapping("/contact-support")
     public Mono<String> contactSupport() {
-        return Mono.just("An Error Occurred. Please try after sometime or contact support time!");
+        return Mono.just("An Error Occurred. Please try after sometime or contact support team!!");
     }
 }
