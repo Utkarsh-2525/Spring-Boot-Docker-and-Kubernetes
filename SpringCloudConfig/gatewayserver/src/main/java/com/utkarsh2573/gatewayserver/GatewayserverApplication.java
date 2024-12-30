@@ -52,8 +52,9 @@ public class GatewayserverApplication {
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()).retry(retryConfig -> retryConfig.setRetries(3)
                                         .setMethods(HttpMethod.GET)
                                         .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true))
-                                .requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
-                                        .setKeyResolver(userKeyResolver())))
+//                                .requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
+//                                        .setKeyResolver(userKeyResolver()))
+                        )
                         .uri("lb://CARDS"))
                 .build();
     }
@@ -64,15 +65,15 @@ public class GatewayserverApplication {
                 .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
     }
-
-    @Bean
-    public RedisRateLimiter redisRateLimiter() {
-        return new RedisRateLimiter(1, 1, 1);
-    }
-
-    @Bean
-    KeyResolver userKeyResolver() {
-        return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
-                .defaultIfEmpty("Anonymous");
-    }
+//
+//    @Bean
+//    public RedisRateLimiter redisRateLimiter() {
+//        return new RedisRateLimiter(1, 1, 1);
+//    }
+//
+//    @Bean
+//    KeyResolver userKeyResolver() {
+//        return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))
+//                .defaultIfEmpty("Anonymous");
+//    }
 }
