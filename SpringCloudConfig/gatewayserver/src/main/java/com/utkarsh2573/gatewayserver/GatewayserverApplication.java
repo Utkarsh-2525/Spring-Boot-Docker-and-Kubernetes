@@ -51,7 +51,9 @@ public class GatewayserverApplication {
                                 .rewritePath("/demobank/cards/(?<segment>.*)", "/${segment}")
                                 .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()).retry(retryConfig -> retryConfig.setRetries(3)
                                         .setMethods(HttpMethod.GET)
-                                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
+                                        .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true))
+                                .requestRateLimiter(config -> config.setRateLimiter(redisRateLimiter())
+                                        .setKeyResolver(userKeyResolver())))
                         .uri("lb://CARDS"))
                 .build();
     }
