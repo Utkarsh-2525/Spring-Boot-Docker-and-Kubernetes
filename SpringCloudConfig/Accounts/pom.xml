@@ -112,7 +112,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/accounts:v10.0</image>
+                        <image>utkarsh2573/accounts:v11.0</image>
                     </to>
                 </configuration>
             </plugin>
