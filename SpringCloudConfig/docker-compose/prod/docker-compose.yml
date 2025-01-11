@@ -39,18 +39,18 @@ services:
         networks:
             <<: *loki-dns
 
-#    alloy:
-#        image: grafana/alloy:latest
-#        volumes:
-#            - ./alloy-local-config.yaml:/etc/alloy/config.alloy:ro
-#            - /var/run/docker.sock:/var/run/docker.sock
-#        command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
-#        ports:
-#            - 12345:12345
-#        depends_on:
-#            - gateway
-#        networks:
-#            - loki
+    #    alloy:
+    #        image: grafana/alloy:latest
+    #        volumes:
+    #            - ./alloy-local-config.yaml:/etc/alloy/config.alloy:ro
+    #            - /var/run/docker.sock:/var/run/docker.sock
+    #        command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+    #        ports:
+    #            - 12345:12345
+    #        depends_on:
+    #            - gateway
+    #        networks:
+    #            - loki
 
     minio:
         image: minio/minio
@@ -79,6 +79,17 @@ services:
             service: network-deploy-service
             file: common-config.yml
 
+    prometheus:
+        image: prom/prometheus:v2.45.0
+        container_name: prometheus
+        ports:
+            - "9090:9090"
+        volumes:
+            - ../observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        extends:
+            file: common-config.yml
+            service: network-deploy-service
+
     grafana:
         image: grafana/grafana:latest
         environment:
@@ -91,22 +102,11 @@ services:
             - sh
             - -euc
             - |
-                mkdir -p /etc/grafana/provisioning/datasources
-                cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
-                apiVersion: 1
-                datasources:
-                  - name: Loki
-                    type: loki
-                    access: proxy
-                    url: http://gateway:3100
-                    jsonData:
-                      httpHeaderName1: "X-Scope-OrgID"
-                    secureJsonData:
-                      httpHeaderValue1: "tenant1"
-                EOF
-                /run.sh
+              /run.sh
         ports:
             - "3000:3000"
+        volumes:
+            - ../observability/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
         healthcheck:
             test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
             interval: 10s
@@ -116,18 +116,18 @@ services:
             service: network-deploy-service
             file: common-config.yml
 
-#    backend:
-#        image: grafana/loki:latest
-#        volumes:
-#            - ./loki-config.yaml:/etc/loki/config.yaml
-#        ports:
-#            - "3100"
-#            - "7946"
-#        command: "-config.file=/etc/loki/config.yaml -target=backend -legacy-read-mode=false"
-#        depends_on:
-#            - gateway
-#        networks:
-#            - loki
+    #    backend:
+    #        image: grafana/loki:latest
+    #        volumes:
+    #            - ./loki-config.yaml:/etc/loki/config.yaml
+    #        ports:
+    #            - "3100"
+    #            - "7946"
+    #        command: "-config.file=/etc/loki/config.yaml -target=backend -legacy-read-mode=false"
+    #        depends_on:
+    #            - gateway
+    #        networks:
+    #            - loki
 
 
     gateway:
