@@ -63,5 +63,4 @@ public class CustomerController {
         CustomerDetailsDto customerDetailsDto = IcustomerService.fetchCustomerDetails(mobileNumber, correlationID);
         return ResponseEntity.status(HttpStatus.OK).body(customerDetailsDto);
     }
-
 }
