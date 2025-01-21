@@ -16,12 +16,19 @@ spring:
                 locator:
                     enabled: false
                     lowerCaseServiceId: true
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
 #    data:                           # Redis related configurations
 #        redis:
 #            connect-timeout: 2s
 #            host: localhost
 #            port: 6379
 #            timeout: 1s
+
+
 
 management:
     endpoints:
