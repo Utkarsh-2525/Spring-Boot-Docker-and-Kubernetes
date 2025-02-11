@@ -134,7 +134,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>utkarsh2573/loans:v11.0</image>
+						<image>utkarsh2573/loans:v12.0</image>
 					</to>
 				</configuration>
 			</plugin>
