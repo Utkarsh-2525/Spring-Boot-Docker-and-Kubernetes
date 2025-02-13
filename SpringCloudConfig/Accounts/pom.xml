@@ -124,7 +124,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/accounts:v12.0</image>
+                        <image>utkarsh2573/accounts:v13.0</image>
                     </to>
                 </configuration>
             </plugin>

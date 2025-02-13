@@ -1,6 +1,6 @@
 services:
     configserver:
-        image: "utkarsh2573/configserver:v12.0"
+        image: "utkarsh2573/configserver:v13.0"
         container_name: configserver-ms
         ports:
             - "8071:8071"
@@ -15,7 +15,7 @@ services:
             service: microservice-base-config
     
     eurekaserver:
-        image: "utkarsh2573/eurekaserver:v12.0"
+        image: "utkarsh2573/eurekaserver:v13.0"
         container_name: eurekaserver-ms
         ports:
             - "8070:8070"
@@ -35,7 +35,7 @@ services:
             SPRING_APPLICATION_NAME: "eurekaserver"
     
     accounts:
-        image: "utkarsh2573/accounts:v12.0"
+        image: "utkarsh2573/accounts:v13.0"
         container_name: accounts-ms
         ports:
             - "8080:8080"
@@ -57,7 +57,7 @@ services:
             service: microservice-eureka-config
     
     loans:
-        image: "utkarsh2573/loans:v12.0"
+        image: "utkarsh2573/loans:v13.0"
         container_name: loans-ms
         ports:
             - "8090:8090"
@@ -79,7 +79,7 @@ services:
             service: microservice-eureka-config
     
 #    loans1:
-#        image: "utkarsh2573/loans:v12.0"
+#        image: "utkarsh2573/loans:v13.0"
 #        container_name: loans-ms1
 #        ports:
 #            - "8091:8090"
@@ -95,7 +95,7 @@ services:
 #            service: microservice-eureka-config
     
     cards:
-        image: "utkarsh2573/cards:v12.0"
+        image: "utkarsh2573/cards:v13.0"
         container_name: cards-ms
         ports:
             - "9000:9000"
@@ -117,7 +117,7 @@ services:
             service: microservice-eureka-config
 
     gatewayserver:
-        image: "utkarsh2573/gatewayserver:v12.0"
+        image: "utkarsh2573/gatewayserver:v13.0"
         container_name: gatewayserver-ms
         ports:
             - "8072:8072"
