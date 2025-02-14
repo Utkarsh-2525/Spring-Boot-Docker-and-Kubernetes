@@ -1,6 +1,6 @@
 package com.utkarsh2573.message.functions;
 
-import com.utkarsh2573.message.dto.AccountsMessageDto;
+import com.utkarsh2573.message.dto.accountsMessageDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ public class MessageFunctions {
     private static final Logger logger = LoggerFactory.getLogger(MessageFunctions.class);
 
     @Bean
-    public Function<AccountsMessageDto, AccountsMessageDto> email() {
+    public Function<accountsMessageDto, accountsMessageDto> email() {
         return accountsMessageDto -> {
             logger.info("Sending email with details: " + accountsMessageDto.toString());
             return accountsMessageDto;
@@ -21,7 +21,7 @@ public class MessageFunctions {
     }
 
     @Bean
-    public Function<AccountsMessageDto, Long> sms() {
+    public Function<accountsMessageDto, Long> sms() {
         return accountsMessageDto -> {
             logger.info("Sending sms with details: {}", accountsMessageDto.toString());
             return accountsMessageDto.accountNumber();

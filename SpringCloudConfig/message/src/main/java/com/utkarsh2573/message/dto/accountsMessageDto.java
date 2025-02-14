@@ -7,6 +7,6 @@ package com.utkarsh2573.message.dto;
  * @param email
  * @param mobileNumber
  */
-public record AccountsMessageDto(Long accountNumber, String name, String email, String mobileNumber) {
+public record accountsMessageDto(Long accountNumber, String name, String email, String mobileNumber) {
 
 }
