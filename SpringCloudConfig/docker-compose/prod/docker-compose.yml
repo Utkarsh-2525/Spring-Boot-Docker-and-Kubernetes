@@ -1,4 +1,19 @@
 services:
+    rabbit:
+        image: rabbitmq:4.0-management
+        hostname: rabbitmq
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        healthcheck:
+            test: rabbitmq-diagnostics check_port_connectivity
+            interval: 10s
+            timeout: 5s
+            retries: 10
+            start_period: 5s
+        extends:
+            file: common-config.yml
+            service: network-deploy-service
     keycloak:
         image: quay.io/keycloak/keycloak:22.0.1
         container_name: keycloak
@@ -271,18 +286,17 @@ services:
 #            - "8080:8080"
         healthcheck:
             test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
-            interval: 10s
+            interval: 30s
             timeout: 5s
-            retries: 10
-            start_period: 10s
+            retries: 30
+            start_period: 30s
         depends_on:
-            configserver:
-                condition: service_healthy
-            eurekaserver:
+            rabbit:
                 condition: service_healthy
         environment:
             SPRING_APPLICATION_NAME: "accounts"
             OTEL_SERVICE_NAME: "accounts"
+            SPRING_RABBITMQ_HOST: "rabbit"
         extends:
             file: common-config.yml
             service: microservice-eureka-config
@@ -348,6 +362,18 @@ services:
         extends:
             file: common-config.yml
             service: microservice-eureka-config
+
+    message:
+        image: "utkarsh2573/message:v13.0"
+        container_name: message-ms
+        depends_on:
+            rabbit:
+                condition: service_healthy
+        environment:
+            SPRING_RABBITMQ_HOST: "rabbit"
+        extends:
+            file: common-config.yml
+            service: network-deploy-service
 
     gatewayserver:
         image: "utkarsh2573/gatewayserver:v13.0"
