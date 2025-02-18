@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -74,7 +74,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/message:v13.0</image>
+                        <image>utkarsh2573/message:v14</image>
                     </to>
                 </configuration>
             </plugin>

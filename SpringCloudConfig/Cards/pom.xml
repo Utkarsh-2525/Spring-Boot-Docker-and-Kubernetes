@@ -121,7 +121,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>utkarsh2573/cards:v13.0</image>
+						<image>utkarsh2573/cards:v14</image>
 					</to>
 				</configuration>
 			</plugin>

@@ -121,7 +121,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/gatewayserver:v13.0</image>
+                        <image>utkarsh2573/gatewayserver:v14</image>
                     </to>
                 </configuration>
             </plugin>
