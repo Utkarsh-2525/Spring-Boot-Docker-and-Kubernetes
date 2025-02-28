@@ -9,8 +9,8 @@ appName: gatewayserver
 replicaCount: 1
 
 image:
-  repository: demobank/gatewayserver
-  tag: v14
+  repository: utkarsh2573/gatewayserver
+  tag: v17
 
 containerPort: 8072
 

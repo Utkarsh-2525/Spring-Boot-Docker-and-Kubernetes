@@ -9,8 +9,8 @@ appName: cards
 replicaCount: 1
 
 image:
-  repository: demobank/cards
-  tag: v14
+  repository: utkarsh2573/cards
+  tag: v17
 
 containerPort: 9000
 

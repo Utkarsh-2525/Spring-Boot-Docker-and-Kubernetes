@@ -9,8 +9,8 @@ appName: configserver
 replicaCount: 1
 
 image:
-  repository: demobank/configserver
-  tag: v14
+  repository: utkarsh2573/configserver
+  tag: v17
 
 containerPort: 8071
 

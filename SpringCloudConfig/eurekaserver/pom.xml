@@ -85,7 +85,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/${project.artifactId}:v14</image>
+                        <image>utkarsh2573/${project.artifactId}:v17</image>
                     </to>
                 </configuration>
             </plugin>

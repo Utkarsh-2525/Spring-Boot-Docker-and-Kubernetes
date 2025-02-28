@@ -61,7 +61,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-kubernetes-discoveryclient</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -121,7 +121,7 @@
 				<version>3.4.2</version>
 				<configuration>
 					<to>
-						<image>utkarsh2573/cards:v14</image>
+						<image>utkarsh2573/cards:v17</image>
 					</to>
 				</configuration>
 			</plugin>

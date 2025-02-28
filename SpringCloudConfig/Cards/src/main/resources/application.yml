@@ -20,6 +20,10 @@ spring:
         show-sql: true
     config:
         import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails to start, microservices would still run
+    cloud:
+        kubernetes:
+            discovery:
+                all-namespaces: true
 #    rabbitmq:
 #        host: "localhost"
 #        port: 5672
@@ -52,14 +56,14 @@ endpoints:
     shutdown:
         enabled: true
 
-eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        fetchRegistry: true
-        registerWithEureka: true
-        serviceUrl:
-            defaultZone: http://localhost:8070/eureka/
+#eureka:
+#    instance:
+#        prefer-ip-address: true
+#    client:
+#        fetchRegistry: true
+#        registerWithEureka: true
+#        serviceUrl:
+#            defaultZone: http://localhost:8070/eureka/
 info:
     app:
         name: "accounts"

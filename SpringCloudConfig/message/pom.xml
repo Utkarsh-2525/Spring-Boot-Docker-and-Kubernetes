@@ -74,7 +74,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>utkarsh2573/message:v14</image>
+                        <image>utkarsh2573/message:v17</image>
                     </to>
                 </configuration>
             </plugin>

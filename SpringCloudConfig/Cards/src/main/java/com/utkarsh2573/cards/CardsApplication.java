@@ -10,9 +10,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
 @EnableConfigurationProperties(value = {CardsContactInfoDto.class})
 @OpenAPIDefinition(

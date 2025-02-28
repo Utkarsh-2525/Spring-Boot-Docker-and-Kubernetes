@@ -8,14 +8,22 @@ spring:
     config:
         import: "optional:configserver:http://localhost:8071/" # optional is used to denote that even if config server fails                                                          to start, microservices would still run
     cloud:
+        discovery:
+            client:
+                health-indicator:
+                    enabled: false
         gateway:
             httpclient:
                 connect-timeout: 1000
                 response-timeout: 10s
+        kubernetes:
             discovery:
-                locator:
-                    enabled: false
-                    lowerCaseServiceId: true
+                all-namespaces: true
+                enabled: true
+    #            discovery:
+    #                locator:
+    #                    enabled: false
+    #                    lowerCaseServiceId: true
     security:
         oauth2:
             resourceserver:

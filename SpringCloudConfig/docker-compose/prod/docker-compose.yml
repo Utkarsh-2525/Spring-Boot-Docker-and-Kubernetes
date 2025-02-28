@@ -263,7 +263,7 @@ services:
             file: common-config.yml
 
     configserver:
-        image: "utkarsh2573/configserver:v14"
+        image: "utkarsh2573/configserver:v17"
         container_name: configserver-ms
         ports:
             - "8071:8071"
@@ -280,7 +280,7 @@ services:
             OTEL_SERVICE_NAME: "configserver"
 
     eurekaserver:
-        image: "utkarsh2573/eurekaserver:v14"
+        image: "utkarsh2573/eurekaserver:v17"
         container_name: eurekaserver-ms
         ports:
             - "8070:8070"
@@ -301,7 +301,7 @@ services:
             OTEL_SERVICE_NAME: "eurekaserver"
 
     accounts:
-        image: "utkarsh2573/accounts:v14"
+        image: "utkarsh2573/accounts:v17"
         container_name: accounts-ms
 #        ports:
 #            - "8080:8080"
@@ -320,7 +320,7 @@ services:
             service: microservice-eureka-config
 
     loans:
-        image: "utkarsh2573/loans:v14"
+        image: "utkarsh2573/loans:v17"
         container_name: loans-ms
 #        ports:
 #            - "8090:8090"
@@ -343,7 +343,7 @@ services:
             service: microservice-eureka-config
 
     #    loans1:
-    #        image: "utkarsh2573/loans:v14"
+    #        image: "utkarsh2573/loans:v17"
     #        container_name: loans-ms1
     #        ports:
     #            - "8091:8090"
@@ -359,7 +359,7 @@ services:
     #            service: microservice-eureka-config
 
     cards:
-        image: "utkarsh2573/cards:v14"
+        image: "utkarsh2573/cards:v17"
         container_name: cards-ms
 #        ports:
 #            - "9000:9000"
@@ -382,7 +382,7 @@ services:
             service: microservice-eureka-config
 
     message:
-        image: "utkarsh2573/message:v14"
+        image: "utkarsh2573/message:v17"
         container_name: message-ms
         environment:
             SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: "kafka:9092"
@@ -391,7 +391,7 @@ services:
             service: network-deploy-service
 
     gatewayserver:
-        image: "utkarsh2573/gatewayserver:v14"
+        image: "utkarsh2573/gatewayserver:v17"
         container_name: gatewayserver-ms
         ports:
             - "8072:8072"

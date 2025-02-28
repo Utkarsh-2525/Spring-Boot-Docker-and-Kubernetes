@@ -9,8 +9,8 @@ appName: loans
 replicaCount: 1
 
 image:
-  repository: demobank/loans
-  tag: v14
+  repository: utkarsh2573/loans
+  tag: v17
 
 containerPort: 8090
 

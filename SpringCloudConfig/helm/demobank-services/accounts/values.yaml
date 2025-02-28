@@ -6,11 +6,11 @@ serviceName: accounts
 appLabel: accounts
 appName: accounts
 
-replicaCount: 1
+replicaCount: 2
 
 image:
-  repository: demobank/accounts
-  tag: v14
+  repository: utkarsh2573/accounts
+  tag: v17
 
 containerPort: 8080
 

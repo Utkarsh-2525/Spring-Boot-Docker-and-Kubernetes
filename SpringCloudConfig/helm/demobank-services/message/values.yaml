@@ -9,8 +9,8 @@ appName: message
 replicaCount: 1
 
 image:
-  repository: demobank/message
-  tag: v14
+  repository: utkarsh2573/message
+  tag: v17
 
 containerPort: 9010
 

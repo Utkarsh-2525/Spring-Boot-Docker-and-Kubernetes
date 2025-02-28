@@ -5,9 +5,6 @@ dependencies:
 - name: configserver
   repository: file://../../demobank-services/configserver
   version: 0.1.0
-- name: eurekaserver
-  repository: file://../../demobank-services/eurekaserver
-  version: 0.1.0
 - name: accounts
   repository: file://../../demobank-services/accounts
   version: 0.1.0
@@ -23,5 +20,5 @@ dependencies:
 - name: message
   repository: file://../../demobank-services/message
   version: 0.1.0
-digest: sha256:243cb3d2cff14ef5b5671e361751e37095826beaeff6555fb6b0e656be51079e
-generated: "2025-02-24T01:00:16.6937425+05:30"
+digest: sha256:d123ffe56e280273c4764ec2935f418ba5943f7c8de6554d1907d2991c44a5c3
+generated: "2025-03-01T01:02:08.7970094+05:30"
