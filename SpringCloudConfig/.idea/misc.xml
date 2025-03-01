@@ -18,6 +18,7 @@
         <option value="$PROJECT_DIR$/eurekaserver/pom.xml" />
         <option value="$PROJECT_DIR$/gatewayserver/pom.xml" />
         <option value="$PROJECT_DIR$/message/pom.xml" />
+        <option value="$PROJECT_DIR$/demobank-bom/pom.xml" />
       </list>
     </option>
   </component>

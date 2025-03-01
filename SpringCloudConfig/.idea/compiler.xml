@@ -23,6 +23,7 @@
       <module name="Cards" options="-parameters" />
       <module name="Loans" options="-parameters" />
       <module name="configserver" options="-parameters" />
+      <module name="demobank-bom" options="" />
       <module name="eurekaserver" options="-parameters" />
       <module name="gatewayserver" options="-parameters" />
       <module name="message" options="-parameters" />
