@@ -19,14 +19,14 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Accounts" options="-parameters" />
-      <module name="Cards" options="-parameters" />
-      <module name="Loans" options="-parameters" />
+      <module name="Accounts" options="" />
+      <module name="Cards" options="" />
+      <module name="Loans" options="" />
       <module name="configserver" options="-parameters" />
       <module name="demobank-bom" options="" />
-      <module name="eurekaserver" options="-parameters" />
-      <module name="gatewayserver" options="-parameters" />
-      <module name="message" options="-parameters" />
+      <module name="eurekaserver" options="" />
+      <module name="gatewayserver" options="" />
+      <module name="message" options="" />
     </option>
   </component>
 </project>
